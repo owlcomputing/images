@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant App as Application
+    participant Config as TDAppSettings
+    participant Global as GlobalData
+    participant Storage as FileSystem
+    
+    App->>Config: LoadSettings()
+    Config->>Storage: Read XML
+    Storage-->>Config: Configuration Data
+    Config->>Global: Update Global State
+    Global-->>App: Configuration Ready

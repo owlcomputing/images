@@ -1,0 +1,39 @@
+classDiagram
+    class TDAppSettings {
+        +LoadSettings()
+        +SaveSettings()
+        +GetSetting()
+        +SetSetting()
+    }
+    
+    class GlobalData {
+        +MachineState
+        +SystemConfiguration
+        +RuntimeData
+    }
+    
+    class IMotionControlInterface {
+        <<interface>>
+        +Initialize()
+        +MoveToPosition()
+        +GetStatus()
+        +EmergencyStop()
+    }
+    
+    class MotionControlMitsu {
+        +Initialize()
+        +MoveToPosition()
+        +GetStatus()
+        +EmergencyStop()
+    }
+    
+    class MotionControlOffline {
+        +Initialize()
+        +MoveToPosition()
+        +GetStatus()
+        +EmergencyStop()
+    }
+    
+    IMotionControlInterface <|-- MotionControlMitsu
+    IMotionControlInterface <|-- MotionControlOffline
+    TDAppSettings --> GlobalData

@@ -1,0 +1,13 @@
+graph TD
+    A[TruDelta Application] --> B[Foundation]
+    B --> C[GlobalData]
+    B --> D[TDAppSettings]
+    A --> E[MotionController]
+    E --> F[IMotionControlInterface]
+    F --> G[MotionControlMitsu]
+    F --> H[MotionControlOffline]
+    A --> I[PartEditing]
+    A --> J[Diagnostics]
+    A --> K[Safety PLC]
+    K --> L[Emergency Stop]
+    K --> M[Safety Interlocks]

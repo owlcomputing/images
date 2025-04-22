@@ -1,0 +1,14 @@
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Loading: Load Program
+    Loading --> Validating: Program Loaded
+    Validating --> Ready: Program Valid
+    Validating --> Error: Invalid Program
+    Ready --> Running: Start Program
+    Running --> Paused: Pause Command
+    Paused --> Running: Resume Command
+    Running --> Dressing: Dress Required
+    Dressing --> Running: Dress Complete
+    Running --> Complete: Program End
+    Complete --> Idle: Reset
+    Error --> Idle: Clear Error

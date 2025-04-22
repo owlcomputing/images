@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant UI as User Interface
+    participant MC as MotionController
+    participant Native as NativeMethods
+    participant HW as Hardware
+    
+    UI->>MC: Move Command
+    MC->>Native: Prepare Motion
+    Native->>HW: Execute Motion
+    HW-->>Native: Motion Status
+    Native-->>MC: Update Status
+    MC-->>UI: Operation Complete

@@ -1,0 +1,8 @@
+stateDiagram-v2
+    [*] --> Safe
+    Safe --> EmergencyStop: E-Stop Triggered
+    EmergencyStop --> Safe: Reset
+    Safe --> Warning: Safety Check Failed
+    Warning --> Safe: Issue Resolved
+    Warning --> EmergencyStop: Critical Failure
+    EmergencyStop --> [*]: System Shutdown

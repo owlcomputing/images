@@ -1,0 +1,12 @@
+graph TD
+    A[TruDelta] --> B[Safety PLC]
+    B --> C[Emergency Stop]
+    B --> D[Door Interlock]
+    B --> E[Axis Limits]
+    B --> F[Spindle Guard]
+    B --> G[Tool Protection]
+    C --> H[System Shutdown]
+    D --> H
+    E --> H
+    F --> H
+    G --> H

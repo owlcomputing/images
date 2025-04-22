@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant App as Application
+    participant Config as Configuration
+    participant MC as Motion Controller
+    participant Safety as Safety PLC
+    participant UI as User Interface
+    
+    App->>Config: Load Settings
+    Config-->>App: Settings Loaded
+    App->>MC: Initialize
+    MC->>Safety: Verify Safety
+    Safety-->>MC: Safety Verified
+    MC-->>App: Initialized
+    App->>UI: Initialize Forms
+    UI-->>App: Ready
+    App->>Config: Save State

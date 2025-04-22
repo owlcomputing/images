@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant UI as User Interface
+    participant MC as MotionController
+    participant Native as NativeMethods
+    participant HW as Hardware
+    participant Safety as Safety PLC
+    
+    UI->>MC: Move Command
+    MC->>Safety: Check Safety Status
+    Safety-->>MC: Safety OK
+    MC->>Native: Prepare Motion
+    Native->>HW: Execute Motion
+    HW-->>Native: Motion Status
+    Native-->>MC: Update Status
+    MC->>Safety: Verify Safety
+    Safety-->>MC: Safety Verified
+    MC-->>UI: Operation Complete

@@ -1,0 +1,11 @@
+stateDiagram-v2
+    [*] --> Initializing
+    Initializing --> Idle
+    Idle --> Running
+    Running --> Paused
+    Paused --> Running
+    Running --> Error
+    Error --> Idle
+    Running --> Idle
+    Paused --> Idle
+    Idle --> [*]

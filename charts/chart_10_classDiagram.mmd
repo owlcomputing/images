@@ -1,0 +1,79 @@
+classDiagram
+    class TDAppSettings {
+        +LoadSettings() void
+        +SaveSettings() void
+        +GetSetting(string key) object
+        +SetSetting(string key, object value) void
+        -settings Dictionary~string,object~
+    }
+    
+    class GlobalData {
+        +PrimaryMotionController IMotionControlInterface
+        +AxisPositions float[]
+        +FormMain FormMain
+        +FormPositionsPanel FormPositionsPanel
+        +FormCycleStatusPanel FormCycleStatusPanel
+        +FormEditPartProgram FormEditProgram
+        +FormEditDressProgram FormEditProgram
+        +FormRunProgram FormRunMachine
+        +PrimaryDressFile PartFile
+        +SecondaryDressFile PartFile
+        +HighlightOverrideCountdownTimer int
+        +HomeRequested bool
+        +TotalOffsetAppliedAxis1 double
+        +TotalOffsetAppliedAxis2 double
+        +AllowTruDeltaExit bool
+        +SetPropertyByName(object, string, string) Exception
+        +AnnounceMetricMode() void
+        +LogValueBoxValueChange(TruValueBox) void
+    }
+    
+    class IMotionControlInterface {
+        <<interface>>
+        +CncConnected bool
+        +ControllerInEStop bool
+        +GetUserPosition(int axis) double
+        +GetPhysicalPosition(int axis) double
+        +SendProgram(string programFilePath) void
+        +ActivateProgram(string programName) void
+        +StopProgram() void
+        +IsInGrindingCycle() bool
+        +IsAutoModeRunning() bool
+        +IsJogMode() bool
+        +GetCurrentBlock() int
+        +GetCurrentRunningProgram() string
+        +GetPercentageComplete() double
+    }
+    
+    class MotionControlMitsu {
+        +Initialize() void
+        +MoveToPosition() void
+        +GetStatus() MotionStatus
+        +EmergencyStop() void
+        -mitsuConnection MitsubishiConnection
+        -HandleMotionEvents() void
+    }
+    
+    class MotionControlOffline {
+        +Initialize() void
+        +MoveToPosition() void
+        +GetStatus() MotionStatus
+        +EmergencyStop() void
+        -simulatedPosition double[]
+        -UpdateSimulatedPosition() void
+    }
+    
+    class PartFile {
+        +FileName string
+        +ProgramName string
+        +Moves List~Move~
+        +LoadFromFile(string path) void
+        +SaveToFile(string path) void
+        +AddMove(Move move) void
+        -ValidateMove(Move move) bool
+    }
+    
+    IMotionControlInterface <|-- MotionControlMitsu
+    IMotionControlInterface <|-- MotionControlOffline
+    TDAppSettings --> GlobalData
+    GlobalData --> PartFile
